@@ -9,7 +9,7 @@ import ExpoTHREE, { THREE } from 'expo-three';
 import Gem from '../nodes/Gem';
 import Train from '../nodes/Train';
 import Assets from '../../Assets';
-
+import Vehicle from '../nodes/Vehicle';
 require('three/examples/js/controls/OrbitControls');
 
 class PlayingState extends Exotic.State {
@@ -48,6 +48,7 @@ class PlayingState extends Exotic.State {
     this.game.world.gravity.set(0, -5, 0);
     this.game.world.defaultContactMaterial.contactEquationStiffness = 1e8;
     this.game.world.defaultContactMaterial.contactEquationRelaxation = 10;
+    this.game.world.defaultContactMaterial.friction = 0;
   };
 
   loadObjects = async () => {
@@ -55,12 +56,13 @@ class PlayingState extends Exotic.State {
     When we add `GameObject`s to eachother, they call `loadAsync` so we initialize in a promise.
     */
     const types = [
-      new Hero(),
-      new Ground(),
-      new Gem(),
+      // new Hero(),
 
-      new Exotic.Particles.Snow(),
-      new Train(),
+      // new Gem(),
+      new Vehicle(),
+      new Ground(),
+      // new Exotic.Particles.Snow(),
+      // new Train(),
       new Lighting(),
     ];
     const promises = types.map(type => this.add(type));
@@ -68,28 +70,19 @@ class PlayingState extends Exotic.State {
     this.hero = hero;
     this.ground = ground;
 
-    this.game.world.addContactMaterial(
-      new CANNON.ContactMaterial(ground.body.material, hero.body.material, {
-        friction: 0.0,
-        restitution: 0.5,
-      })
-    );
-    this.game.world.addContactMaterial(
-      new CANNON.ContactMaterial(ground.body.material, gem.body.material, {
-        friction: 0.0,
-        restitution: 0.9,
-      })
-    );
-  };
-
-  /*
-    This provides the PanResponder event.
-  */
-  onTouchesBegan = ({ locationX: x, locationY: y }) => {
-    this.hero.body.position.set(0, 0, 0);
-    this.hero.body.velocity.set(0, 0, 0);
-
-    this.runHitTest();
+    // this.game.world.addContactMaterial(
+    //   new CANNON.ContactMaterial(ground.body.material, hero.wheelMaterial, {
+    //     friction: 0.3,
+    //     restitution: 0,
+    //     contactEquationStiffness: 1000,
+    //   })
+    // );
+    // this.game.world.addContactMaterial(
+    //   new CANNON.ContactMaterial(ground.body.material, gem.body.material, {
+    //     friction: 0.0,
+    //     restitution: 0.9,
+    //   })
+    // );
   };
 
   runHitTest = () => {

@@ -16,7 +16,7 @@ class Game extends Exotic.Game {
     this.scene.size = { width: width / scale, height: height / scale };
 
     /// Standard Camera
-    this.camera = new THREE.PerspectiveCamera(75, width / height, 0.01, 10000);
+    this.camera = new Exotic.ChaseCamera(75, width / height, 0.01, 10000);
     await this.loadAsync(this.scene);
   };
 
@@ -51,6 +51,7 @@ class Game extends Exotic.Game {
   };
 
   update = (delta, time) => {
+    // this.camera.update();
     this.renderer.render(this.scene, this.camera);
 
     super.update(delta, time);

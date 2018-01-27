@@ -16,7 +16,7 @@
       "supportsTablet": true
     },
     "packagerOpts": {
-      "assetExts": ["ttf", "mp4", "otf", "xml", "obj", "mtl", "gif"]
+      "assetExts": ["ttf", "mp4", "otf", "xml", "obj", "mtl", "gif", "bin", "json"]
     }
   }
 }
