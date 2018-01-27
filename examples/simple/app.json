@@ -1,13 +1,14 @@
 {
   "expo": {
     "name": "simple",
-    "description": "@expo/exotic simple example",
+    "description": "exotic simple example",
     "slug": "exotic-simple",
     "sdkVersion": "25.0.0",
     "version": "1.0.0",
     "primaryColor": "#5844ed",
     "icon": "./assets/icons/expo.png",
     "loading": {
+      "backgroundColor": "#5844ed",
       "icon": "./assets/icons/expo.png",
       "hideExponentText": false
     },

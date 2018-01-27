@@ -25,14 +25,14 @@ class Game extends Exotic.Game {
   };
 
   configureRenderer = ({ context, width, height, scale }) => {
-    const crazy = false;
+    const fastDevice = true;
     // renderer
     this.renderer = ExpoTHREE.createRenderer({
       gl: context,
-      // precision: crazy ? 'highp' : 'mediump',
-      antialias: false, //crazy ? true : false,
+      precision: fastDevice ? 'highp' : 'mediump',
+      antialias: fastDevice ? true : false,
+      maxLights: fastDevice ? 4 : 2,
       stencil: false,
-      maxLights: crazy ? 4 : 2,
     });
     this.renderer.setPixelRatio(scale);
     this.renderer.setSize(width / scale, height / scale);
@@ -49,7 +49,7 @@ class Game extends Exotic.Game {
 
   loadAsync = async scene => {
     this.state = new PlayingState(this);
-    this.state.loadAsync(this.scene);
+    await this.state.loadAsync(this.scene);
     this.scene.add(this.state);
     return super.loadAsync(this.scene);
   };

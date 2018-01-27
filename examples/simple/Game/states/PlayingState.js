@@ -13,7 +13,6 @@ require('three/examples/js/controls/OrbitControls');
 class PlayingState extends Exotic.State {
   name = 'playing';
   raycaster = new THREE.Raycaster();
-  touch = new THREE.Vector2();
 
   /*
     We use loadAsync in a nested form because this helps the components know when to hide the loader.
@@ -86,12 +85,6 @@ class PlayingState extends Exotic.State {
     );
   };
 
-  updateTouch = ({ x, y }) => {
-    this.touch.x = x / this.game.scene.size.width * 2 - 1;
-    this.touch.y = -(y / this.game.scene.size.height) * 2 + 1;
-    this.raycaster.setFromCamera(this.touch, this.game.camera);
-  };
-
   /*
     This provides the PanResponder event.
   */
@@ -99,12 +92,11 @@ class PlayingState extends Exotic.State {
     this.hero.body.position.set(0, 0, 0);
     this.hero.body.velocity.set(0, 0, 0);
 
-    this.updateTouch({ x, y });
-
     this.runHitTest();
   };
 
   runHitTest = () => {
+    this.raycaster.setFromCamera(this.game.touch, this.game.camera);
     const intersects = this.raycaster.intersectObjects(this.ground.children);
     for (const intersect of intersects) {
       const { distance, face, faceIndex, object, point, uv } = intersect;
