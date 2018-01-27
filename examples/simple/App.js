@@ -46,12 +46,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
-    resizeMode: 'contain',
   },
   loadingImage: {
     minWidth: '25%',
     maxWidth: '25%',
     aspectRatio: 1,
+    resizeMode: 'contain',
   },
 });
 

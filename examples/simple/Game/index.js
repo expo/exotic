@@ -20,7 +20,7 @@ class Game extends Exotic.Game {
     this.scene.size = { width: width / scale, height: height / scale };
 
     /// Standard Camera
-    this.camera = new THREE.PerspectiveCamera(75, width / height, 0.01, 1000);
+    this.camera = new THREE.PerspectiveCamera(75, width / height, 0.01, 10000);
     await this.loadAsync(this.scene);
   };
 

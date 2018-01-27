@@ -40,7 +40,7 @@ class PlayingState extends Exotic.State {
         })
       )
     );
-    this.game.scene.fog = new THREE.Fog(0x434955, 50, 100);
+    // this.game.scene.fog = new THREE.Fog(0x434955, 50, 100);
   };
 
   configureCamera = () => {
