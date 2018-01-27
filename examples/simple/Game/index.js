@@ -3,15 +3,11 @@ import ExpoTHREE, { THREE } from 'expo-three';
 import { PixelRatio } from 'react-native';
 
 import PlayingState from './states/PlayingState';
+import Colors from '../constants/Colors';
 
 class Game extends Exotic.Game {
   onContextCreate = async context => {
-    Exotic.Factory.shared.initMaterials({
-      red: 0xff0000,
-      blue: 0x0000ff,
-      green: 0x00ff00,
-      white: 0xffffff,
-    });
+    Exotic.Factory.shared.initMaterials(Colors);
 
     const { drawingBufferWidth: width, drawingBufferHeight: height } = context;
     const scale = PixelRatio.get();

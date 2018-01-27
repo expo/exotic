@@ -1973,6 +1973,15 @@ expo-three@^2.2.1:
     text-encoding "^0.6.4"
     xmldom-qsa "^1.0.3"
 
+expo-three@^2.2.2-alpha.0:
+  version "2.2.2-alpha.0"
+  resolved "https://registry.yarnpkg.com/expo-three/-/expo-three-2.2.2-alpha.0.tgz#91af7ac186e69a5e7c3d40ef86c6fa9a5aa92894"
+  dependencies:
+    expo-asset-utils "^0.0.3"
+    react-native-console-time-polyfill "^0.0.6"
+    text-encoding "^0.6.4"
+    xmldom-qsa "^1.0.3"
+
 expo@^25.0.0:
   version "25.0.0"
   resolved "https://registry.yarnpkg.com/expo/-/expo-25.0.0.tgz#791d0052e159d56854a84d90540bf11c33abfe4d"

@@ -1,6 +1,7 @@
 import Exotic from '@expo/exotic';
 import * as CANNON from 'cannon';
 import ExpoTHREE, { THREE } from 'expo-three';
+import Assets from '../../Assets';
 
 class Gem extends Exotic.PhysicsObject {
   loadBody = () => {
@@ -36,7 +37,7 @@ class Gem extends Exotic.PhysicsObject {
 
   loadGlow = async () => {
     const spriteMaterial = new THREE.SpriteMaterial({
-      map: await ExpoTHREE.loadAsync(require('../../assets/glow.png')),
+      map: await ExpoTHREE.loadAsync(Assets.images['glow.png']),
       color: 0x00ff00,
       transparent: false,
       blending: THREE.AdditiveBlending,

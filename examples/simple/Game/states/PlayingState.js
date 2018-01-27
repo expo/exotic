@@ -5,8 +5,10 @@ import Hero from '../nodes/Hero';
 import Exotic from '@expo/exotic';
 
 import * as CANNON from 'cannon';
-import { THREE } from 'expo-three';
+import ExpoTHREE, { THREE } from 'expo-three';
 import Gem from '../nodes/Gem';
+import Train from '../nodes/Train';
+import Assets from '../../Assets';
 
 require('three/examples/js/controls/OrbitControls');
 
@@ -22,25 +24,19 @@ class PlayingState extends Exotic.State {
 
     this.configureCamera();
     this.configureWorld();
-    this.configureScene();
-    this.game.debugPhysics = false;
+    await this.configureScene();
+    this.game.debugPhysics = true;
 
     new THREE.OrbitControls(this.game.camera);
 
     return await super.loadAsync();
   };
 
-  configureScene = () => {
-    this.game.scene.add(
-      new THREE.Mesh(
-        new THREE.CubeGeometry(1000, 1000, 1000),
-        new THREE.MeshBasicMaterial({
-          color: 0x434955,
-          side: THREE.BackSide,
-        })
-      )
-    );
-    // this.game.scene.fog = new THREE.Fog(0x434955, 50, 100);
+  configureScene = async () => {
+    this.game.scene.background = await ExpoTHREE.loadCubeTextureAsync({
+      assetForDirection: ({ direction }) => Assets.images.skybox[direction + '.jpg'],
+    });
+    this.game.scene.fog = new THREE.Fog(0xa03619, 100, 150);
   };
 
   configureCamera = () => {
@@ -64,6 +60,7 @@ class PlayingState extends Exotic.State {
       new Gem(),
 
       new Exotic.Particles.Snow(),
+      new Train(),
       new Lighting(),
     ];
     const promises = types.map(type => this.add(type));
