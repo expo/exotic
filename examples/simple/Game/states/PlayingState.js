@@ -13,7 +13,6 @@ import Vehicle from '../nodes/Vehicle';
 require('three/examples/js/controls/OrbitControls');
 
 class PlayingState extends Exotic.State {
-  name = 'playing';
   raycaster = new THREE.Raycaster();
 
   /*
@@ -56,13 +55,11 @@ class PlayingState extends Exotic.State {
     When we add `GameObject`s to eachother, they call `loadAsync` so we initialize in a promise.
     */
     const types = [
-      // new Hero(),
-
-      // new Gem(),
-      new Vehicle(),
+      new Hero(),
       new Ground(),
-      // new Exotic.Particles.Snow(),
-      // new Train(),
+      new Gem(),
+      new Exotic.Particles.Snow(),
+      new Train(),
       new Lighting(),
     ];
     const promises = types.map(type => this.add(type));
@@ -70,19 +67,19 @@ class PlayingState extends Exotic.State {
     this.hero = hero;
     this.ground = ground;
 
-    // this.game.world.addContactMaterial(
-    //   new CANNON.ContactMaterial(ground.body.material, hero.wheelMaterial, {
-    //     friction: 0.3,
-    //     restitution: 0,
-    //     contactEquationStiffness: 1000,
-    //   })
-    // );
-    // this.game.world.addContactMaterial(
-    //   new CANNON.ContactMaterial(ground.body.material, gem.body.material, {
-    //     friction: 0.0,
-    //     restitution: 0.9,
-    //   })
-    // );
+    this.game.world.addContactMaterial(
+      new CANNON.ContactMaterial(ground.body.material, hero.wheelMaterial, {
+        friction: 0.3,
+        restitution: 0,
+        contactEquationStiffness: 1000,
+      })
+    );
+    this.game.world.addContactMaterial(
+      new CANNON.ContactMaterial(ground.body.material, gem.body.material, {
+        friction: 0.0,
+        restitution: 0.9,
+      })
+    );
   };
 
   runHitTest = () => {
