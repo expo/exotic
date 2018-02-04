@@ -5,31 +5,12 @@ import { View } from 'react-native';
 import Assets from './Assets';
 import Settings from './constants/Settings';
 import GameScreen from './screens/GameScreen';
-import arrayFromObject from './utils/arrayFromObject';
-import cacheAssetsAsync from './utils/cacheAssetsAsync';
-
+import AssetUtils from 'expo-asset-utils';
+import Assets from './Assets';
 class App extends React.Component {
-  state = { loading: true };
-
-  get loadingScreen() {
-    if (Settings.debug) {
-      return <View />;
-    } else {
-      return <Expo.AppLoading />;
-    }
-  }
-
-  get screen() {
-    return <GameScreen />;
-  }
-
-  componentWillMount() {
-    this._setupExperienceAsync();
-  }
-
-  _setupExperienceAsync = async () => {
-    await Promise.all([this.preloadAsync()]);
-    this.setState({ loading: false });
+  state = {
+    images: {},
+    loading: true,
   };
 
   get fonts() {
@@ -44,14 +25,39 @@ class App extends React.Component {
   }
 
   get files() {
-    return [...arrayFromObject(Assets.images || {}), ...arrayFromObject(Assets.models || {})];
+    return [
+      ...AssetUtils.arrayFromObject(Assets.images || {}),
+      ...AssetUtils.arrayFromObject(Assets.models || {}),
+    ];
   }
 
-  async preloadAsync() {
-    await cacheAssetsAsync({
+  get audio() {
+    return AssetUtils.arrayFromObject(Assets.audio);
+  }
+
+  async preloadAssets() {
+    await AssetUtils.cacheAssetsAsync({
       fonts: this.fonts,
       files: this.files,
+      audio: this.audio,
     });
+    this.setState({ loading: false });
+  }
+
+  componentWillMount() {
+    this.preloadAssets();
+  }
+
+  get loadingScreen() {
+    if (Settings.debug) {
+      return <View />;
+    } else {
+      return <Expo.AppLoading />;
+    }
+  }
+
+  get screen() {
+    return <GameScreen />;
   }
 
   render() {

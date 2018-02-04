@@ -1960,6 +1960,10 @@ expo-asset-utils@^0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/expo-asset-utils/-/expo-asset-utils-0.0.3.tgz#6331b24de181d65f548dea5a21debc589b35947d"
 
+expo-asset-utils@^0.0.4-alpha.0:
+  version "0.0.4-alpha.0"
+  resolved "https://registry.yarnpkg.com/expo-asset-utils/-/expo-asset-utils-0.0.4-alpha.0.tgz#4be816c3c603209cc800d094276b462c966b31d2"
+
 expo-graphics@^0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/expo-graphics/-/expo-graphics-0.0.2.tgz#9d7d9530133561561e2546b17901a25caac69ecd"

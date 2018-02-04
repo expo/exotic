@@ -2,21 +2,13 @@
   "name": "@expo/exotic",
   "version": "0.0.0",
   "description": "A game engine for 3D Expo Games",
-  "files": [
-    "lib"
-  ],
+  "files": ["lib"],
   "main": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/expo/@expo/exotic.git"
   },
-  "keywords": [
-    "expo",
-    "game",
-    "engine",
-    "react-native",
-    "react"
-  ],
+  "keywords": ["expo", "game", "engine", "react-native", "react"],
   "author": "Evan Bacon",
   "license": "MIT",
   "peerDependencies": {
@@ -26,7 +18,7 @@
     "EventEmitter": "^1.0.0",
     "cannon": "^0.6.2",
     "expo-graphics": "^0.0.2",
-    "expo-three": "^2.2.1",
+    "expo-three": "^2.2.2-alpha.0",
     "gsap": "^1.20.3",
     "randomcolor": "^0.5.3",
     "three": "^0.89.0",
@@ -34,7 +26,8 @@
   },
   "devDependencies": {
     "expo": "^25.0.0",
-    "react": "16.0.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz"
+    "react": "16.2.0",
+    "react-native":
+      "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz"
   }
 }

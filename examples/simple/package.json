@@ -9,6 +9,7 @@
     "@expo/exotic": "../../expo-exotic-v0.0.0.tgz",
     "cannon": "^0.6.2",
     "expo": "^25.0.0",
+    "expo-asset-utils": "^0.0.4-alpha.0",
     "expo-three": "^2.2.2-alpha.0",
     "react": "16.2.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz"
