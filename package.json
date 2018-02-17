@@ -6,7 +6,7 @@
   "main": "lib/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/exotic.git"
+    "url": "https://github.com/expo/exotic.git"
   },
   "keywords": ["expo", "game", "engine", "react-native", "react"],
   "author": "Evan Bacon",
