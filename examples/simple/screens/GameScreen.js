@@ -1,4 +1,4 @@
-import { GameView } from '@expo/exotic';
+import { GameView } from 'expo-exotic';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
@@ -23,8 +23,8 @@ class GameScreen extends React.Component {
       <View style={styles.container}>
         <GameView
           {...game}
-          onContextCreate={async (context, arSession) => {
-            await onContextCreate(context, arSession);
+          onContextCreate={async props => {
+            await onContextCreate(props);
             this.setState({ loading: false });
           }}
         />

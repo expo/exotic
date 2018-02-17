@@ -1,7 +1,7 @@
 import * as CANNON from 'cannon';
 import ExpoTHREE, { THREE } from 'expo-three';
 
-import Exotic from '@expo/exotic';
+import Exotic from 'expo-exotic';
 
 /*
   This is a general component and demonstrates a static physical object.

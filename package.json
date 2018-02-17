@@ -1,12 +1,12 @@
 {
-  "name": "@expo/exotic",
+  "name": "expo-exotic",
   "version": "0.0.0",
   "description": "A game engine for 3D Expo Games",
   "files": ["lib"],
   "main": "lib/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/expo/@expo/exotic.git"
+    "url": "https://github.com/exotic.git"
   },
   "keywords": ["expo", "game", "engine", "react-native", "react"],
   "author": "Evan Bacon",
@@ -15,13 +15,13 @@
     "react-native": "*"
   },
   "dependencies": {
+    "@expo/browser-polyfill": "^0.0.0-alpha.4",
     "EventEmitter": "^1.0.0",
     "cannon": "^0.6.2",
-    "expo-graphics": "^0.0.2",
+    "expo-graphics": "^0.0.3",
     "expo-three": "^2.2.2-alpha.0",
-    "gsap": "^1.20.3",
     "randomcolor": "^0.5.3",
-    "three": "^0.89.0",
+    "three": "^0.90.0",
     "three.proton.js": "^0.1.5"
   },
   "devDependencies": {

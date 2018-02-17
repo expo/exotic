@@ -1,4 +1,4 @@
-import Exotic from '@expo/exotic';
+import Exotic from 'expo-exotic';
 import ExpoTHREE, { THREE } from 'expo-three';
 import { PixelRatio } from 'react-native';
 
@@ -6,32 +6,29 @@ import PlayingState from './states/PlayingState';
 import Colors from '../constants/Colors';
 
 class Game extends Exotic.Game {
-  onContextCreate = async context => {
+  onContextCreate = async ({ gl, width, height, scale }) => {
     Exotic.Factory.shared.initMaterials(Colors);
-
-    const { drawingBufferWidth: width, drawingBufferHeight: height } = context;
-    const scale = PixelRatio.get();
-
-    this.configureRenderer({ context, width, height, scale });
-    this.scene.size = { width: width / scale, height: height / scale };
+    this.configureRenderer({ gl, width, height, scale });
+    this.scene.size = { width: width, height: height };
 
     /// Standard Camera
     this.camera = new THREE.PerspectiveCamera(75, width / height, 0.01, 10000);
     await this.loadAsync(this.scene);
   };
 
-  configureRenderer = ({ context, width, height, scale }) => {
+  configureRenderer = ({ gl, width, height, scale }) => {
     const fastDevice = true;
+
     // renderer
     this.renderer = ExpoTHREE.createRenderer({
-      gl: context,
+      gl,
       precision: fastDevice ? 'highp' : 'mediump',
       antialias: fastDevice ? true : false,
       maxLights: fastDevice ? 4 : 2,
       stencil: false,
     });
     this.renderer.setPixelRatio(scale);
-    this.renderer.setSize(width / scale, height / scale);
+    this.renderer.setSize(width, height);
     this.renderer.setClearColor(0x000000);
   };
 

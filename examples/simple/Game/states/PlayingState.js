@@ -1,15 +1,14 @@
-import Ground from '../nodes/Ground';
-import Lighting from '../nodes/Lighting';
-import Hero from '../nodes/Hero';
-
-import Exotic from '@expo/exotic';
-
 import * as CANNON from 'cannon';
+import Exotic from 'expo-exotic';
 import ExpoTHREE, { THREE } from 'expo-three';
-import Gem from '../nodes/Gem';
-import Train from '../nodes/Train';
+
 import Assets from '../../Assets';
-import Vehicle from '../nodes/Vehicle';
+import Gem from '../nodes/Gem';
+import Ground from '../nodes/Ground';
+import Hero from '../nodes/Hero';
+import Lighting from '../nodes/Lighting';
+import Train from '../nodes/Train';
+
 require('three/examples/js/controls/OrbitControls');
 
 class PlayingState extends Exotic.State {
@@ -68,10 +67,9 @@ class PlayingState extends Exotic.State {
     this.ground = ground;
 
     this.game.world.addContactMaterial(
-      new CANNON.ContactMaterial(ground.body.material, hero.wheelMaterial, {
-        friction: 0.3,
-        restitution: 0,
-        contactEquationStiffness: 1000,
+      new CANNON.ContactMaterial(ground.body.material, hero.body.material, {
+        friction: 0.0,
+        restitution: 0.5,
       })
     );
     this.game.world.addContactMaterial(
@@ -80,6 +78,12 @@ class PlayingState extends Exotic.State {
         restitution: 0.9,
       })
     );
+  };
+
+  onTouchesBegan = ({ locationX: x, locationY: y }) => {
+    this.hero.body.position.set(0, 0, 0);
+    this.hero.body.velocity.set(0, 0, 0);
+    this.runHitTest();
   };
 
   runHitTest = () => {

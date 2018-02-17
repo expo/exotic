@@ -1,4 +1,4 @@
-import Exotic from '@expo/exotic';
+import Exotic from 'expo-exotic';
 import * as CANNON from 'cannon';
 import ExpoTHREE, { THREE } from 'expo-three';
 import Assets from '../../Assets';
@@ -17,7 +17,6 @@ class Gem extends Exotic.PhysicsObject {
     const geometry = new THREE.CylinderGeometry(0.6, 1, 0.3, 6, 1);
     geometry.vertices[geometry.vertices.length - 1].y = -1;
     geometry.verticesNeedUpdate = true;
-
     return geometry;
   }
 

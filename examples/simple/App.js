@@ -1,12 +1,12 @@
 import Expo from 'expo';
+import AssetUtils from 'expo-asset-utils';
 import React from 'react';
 import { View } from 'react-native';
 
 import Assets from './Assets';
 import Settings from './constants/Settings';
 import GameScreen from './screens/GameScreen';
-import AssetUtils from 'expo-asset-utils';
-import Assets from './Assets';
+
 class App extends React.Component {
   state = {
     images: {},
@@ -36,12 +36,17 @@ class App extends React.Component {
   }
 
   async preloadAssets() {
-    await AssetUtils.cacheAssetsAsync({
-      fonts: this.fonts,
-      files: this.files,
-      audio: this.audio,
-    });
-    this.setState({ loading: false });
+    try {
+      await AssetUtils.cacheAssetsAsync({
+        fonts: this.fonts,
+        files: this.files,
+        audio: this.audio,
+      });
+    } catch (e) {
+      console.warn('There was an error caching assets:', e.message); // eslint-disable-line no-console
+    } finally {
+      this.setState({ loading: false });
+    }
   }
 
   componentWillMount() {

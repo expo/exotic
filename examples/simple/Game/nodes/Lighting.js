@@ -1,4 +1,4 @@
-import Exotic from '@expo/exotic';
+import Exotic from 'expo-exotic';
 import { THREE } from 'expo-three';
 
 /*

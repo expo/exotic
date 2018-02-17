@@ -1,4 +1,4 @@
-import Exotic from '@expo/exotic';
+import Exotic from 'expo-exotic';
 import * as CANNON from 'cannon';
 import { THREE } from 'expo-three';
 
