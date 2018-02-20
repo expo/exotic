@@ -69,8 +69,8 @@ App/
 │   ├── nodes
 │   │   ├── Hero.js
 │   │   └── Ground.js
-│   └── states
-│       └── PlayingState.js
+│   └── scenes
+│       └── PlayingLevel.js
 ├── components/
 │   └── Loading.js
 ├── constants/
@@ -136,9 +136,9 @@ Physics objects have a method called `syncPhysicsBody()` that is called in the `
 ```js
 class Node extends Exotic.PhysicsObject {
   /*
-          This is called right after loadAsync.
-          We use this time to setup the physics.
-        */
+                          This is called right after loadAsync.
+                          We use this time to setup the physics.
+                        */
   loadBody = () => {
     this.body = new CANNON.Body({
       mass: 0.5,
@@ -148,14 +148,14 @@ class Node extends Exotic.PhysicsObject {
   };
 
   /*
-          I like to bubble out variables so you can always use the `geometry`, `material`, `mesh` variable names.
-        */
+                          I like to bubble out variables so you can always use the `geometry`, `material`, `mesh` variable names.
+                        */
   get ball() {
     const geometry = new THREE.SphereBufferGeometry(1, 20, 10);
 
     /*
-                  Use a recycled material!
-                */
+                                                  Use a recycled material!
+                                                */
     const material = Exotic.Factory.shared.materials.white;
     const mesh = new THREE.Mesh(geometry, material);
     return mesh;
@@ -171,4 +171,52 @@ export default Node;
 
 ### Exotic.Game
 
-This is the base class for a Game,
+This is the base class for a Game, here you would create a renderer, camera, physics world, and scene.
+
+```js
+class Game extends Exotic.Game {
+  onContextCreate = async props => {
+    this.configureRenderer(props);
+    const { width, height } = this.props;
+    this.scene.size = { width, height };
+    /// Standard Camera
+    this.camera = new THREE.PerspectiveCamera(75, width / height, 0.01, 10000);
+    await this.loadAsync(this.scene);
+  };
+
+  configureRenderer = ({ gl, width, height, scale }) => {
+    const fastDevice = true;
+    // renderer
+    this.renderer = ExpoTHREE.createRenderer({
+      gl,
+      precision: fastDevice ? 'highp' : 'mediump',
+      antialias: fastDevice ? true : false,
+      maxLights: fastDevice ? 4 : 2,
+      stencil: false,
+    });
+    this.renderer.setPixelRatio(scale);
+    this.renderer.setSize(width, height);
+    this.renderer.setClearColor(0x000000);
+  };
+
+  loadAsync = async scene => {
+    this.level = new PlayingLevel(this);
+    await this.level.loadAsync(this.scene);
+    this.scene.add(this.level);
+    return super.loadAsync(this.scene);
+  };
+
+  update = (delta, time) => {
+    this.renderer.render(this.scene, this.camera);
+    super.update(delta, time);
+  };
+
+  onResize = ({ width, height, scale }) => {
+    this.camera.aspect = width / height;
+    this.camera.updateProjectionMatrix();
+    this.renderer.setPixelRatio(scale);
+    this.renderer.setSize(width, height);
+    this.scene.size = { width, height };
+  };
+}
+```

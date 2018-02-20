@@ -2,7 +2,7 @@ import Exotic from 'expo-exotic';
 import ExpoTHREE, { THREE } from 'expo-three';
 import { PixelRatio } from 'react-native';
 
-import PlayingState from './states/PlayingState';
+import PlayingLevel from './levels/PlayingLevel';
 import Colors from '../constants/Colors';
 
 class Game extends Exotic.Game {
@@ -41,9 +41,9 @@ class Game extends Exotic.Game {
   };
 
   loadAsync = async scene => {
-    this.state = new PlayingState(this);
-    await this.state.loadAsync(this.scene);
-    this.scene.add(this.state);
+    this.level = new PlayingLevel(this);
+    await this.level.loadAsync(this.scene);
+    this.scene.add(this.level);
     return super.loadAsync(this.scene);
   };
 

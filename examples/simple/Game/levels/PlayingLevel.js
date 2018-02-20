@@ -11,7 +11,7 @@ import Train from '../nodes/Train';
 
 require('three/examples/js/controls/OrbitControls');
 
-class PlayingState extends Exotic.State {
+class PlayingLevel extends Exotic.GameObject {
   raycaster = new THREE.Raycaster();
 
   /*
@@ -98,4 +98,4 @@ class PlayingState extends Exotic.State {
   };
 }
 
-export default PlayingState;
+export default PlayingLevel;
